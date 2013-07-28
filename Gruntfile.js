@@ -21,14 +21,6 @@ module.exports = function (grunt) {
 
     // default watch configuration
     watch: {
-      widgets: {
-        files: ['app/widgets/**/*.js'],
-        tasks: ['concat']
-      },
-      handlebars: {
-        files: ['app/widgets/**/*.hbs'],
-        tasks: ['handlebars']
-      },
       livereload: {
         files: [
           'app/*.html',
@@ -42,24 +34,8 @@ module.exports = function (grunt) {
 
     jshint: {
       all: [
-        'app/scripts/[^templates].js',
-        'app/widgets/**/*.js'
+        'app/aura_components/**/*.js'
       ]
-    },
-
-    handlebars: {
-      compile: {
-        files: {
-          "app/scripts/templates.js" : ["app/widgets/**/*.hbs"]
-        },
-        options: {
-          wrapped: true,
-          namespace: "Aura.templates",
-          processName: function (filename) {
-            return filename.replace(/^app\/widgets\//, '').replace(/\.hbs$/, '');
-          }
-        }
-      }
     },
 
     connect: {
@@ -110,8 +86,6 @@ module.exports = function (grunt) {
       dist: {
         files: {
           'dist/application.css': [
-            'app/components/ratchet/dist/ratchet.css',
-            'app/components/font-awesome/css/font-awesome.css',
             'app/styles/*.css'
           ]
         }
@@ -122,14 +96,7 @@ module.exports = function (grunt) {
       dist: {
         files: [
           { dest: 'dist/index.php', src: 'dist/index.html' },
-          { cwd: 'app/', dest: 'dist/', src: ['.htaccess', 'robots.txt'], expand: true },
-          {
-            cwd: 'app/components/font-awesome/font/',
-            dest: 'dist/font/',
-            filter: 'isFile',
-            src: '*',
-            expand: true
-          }
+          { cwd: 'app/', dest: 'dist/', src: ['.htaccess', 'robots.txt'], expand: true }
         ]
       }
     },
@@ -161,8 +128,8 @@ module.exports = function (grunt) {
         separator: "\n\n\n\n//--------\n\n\n"
       },
       dist: {
-        src: ['app/widgets/**/*.js'],
-        dest: 'app/scripts/widgets.js'
+        src: ['app/aura_components/**/*.js'],
+        dest: 'app/scripts/aura_components.js'
       }
     }
 
@@ -190,7 +157,6 @@ module.exports = function (grunt) {
     'clean:dist',
     'concat',
     'jshint',
-    'handlebars',
     'useminPrepare',
 
     'uglify',

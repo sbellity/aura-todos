@@ -1,0 +1,9 @@
+{
+  "name": "aura-todos",
+  "version": "0.2.0",
+  "dependencies": {
+    "aura" : "0.9.1",
+    "backbone.localStorage" : "latest",
+    "backbone": "1.0.0"
+  }
+}
